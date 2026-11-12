@@ -1,0 +1,266 @@
+/* ==========================================================================
+   PUBLIC PAGE STYLES (Landing, Consultation, Courses, Map, Fanpage)
+   ========================================================================== */
+
+.public-page {
+    min-height: 100vh;
+    background-color: var(--background);
+}
+
+/* Navbar */
+.public-navbar {
+    background: #ffffff;
+    border-bottom: 1px solid var(--border);
+    padding: 0.75rem 0;
+    box-shadow: var(--shadow-xs);
+}
+
+.public-brand {
+    width: 38px;
+    height: 38px;
+    border-radius: var(--radius);
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    color: #fff;
+    display: inline-grid;
+    place-items: center;
+    font-size: 1.25rem;
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+}
+
+/* Hero Section */
+.public-hero {
+    padding: clamp(48px, 7vw, 84px) 0;
+    background: linear-gradient(180deg, #f0f7ff 0%, #f8fafc 100%);
+    border-bottom: 1px solid #eef2f6;
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 6px 14px;
+    border-radius: 999px;
+    color: var(--primary);
+    background: var(--primary-subtle);
+    border: 1px solid var(--primary-border);
+    font-size: 0.8125rem;
+    font-weight: 600;
+}
+
+.public-hero h1 {
+    color: #0f172a;
+    font-size: clamp(2rem, 3.5vw, 2.75rem);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+}
+
+.public-hero .lead {
+    color: #475569;
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+/* Benefit Cards */
+.benefit {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 1.15rem;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xs);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.benefit:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.benefit i {
+    color: var(--primary);
+    font-size: 1.35rem;
+    margin-bottom: 0.25rem;
+}
+
+.benefit strong {
+    font-size: 0.95rem;
+    color: var(--foreground);
+}
+
+.benefit span {
+    color: var(--foreground-muted);
+    font-size: 0.8125rem;
+}
+
+/* Consultation Form Card */
+.consultation-card {
+    padding: clamp(24px, 3.5vw, 36px);
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Content Sections */
+.public-section {
+    padding: clamp(48px, 6vw, 76px) 0;
+}
+
+.course-card {
+    height: 100%;
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-xs);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.course-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+    border-color: #cbd5e1;
+}
+
+.course-icon {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border-radius: var(--radius);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.step-number {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.875rem;
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+}
+
+.faq-card {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.5rem;
+    height: 100%;
+    box-shadow: var(--shadow-xs);
+    transition: border-color 0.15s ease;
+}
+
+.faq-card:hover {
+    border-color: #cbd5e1;
+}
+
+/* Location & Map Section */
+.location-section {
+    background: #f8fafc;
+    border-top: 1px solid var(--border);
+}
+
+.location-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(24px, 3.5vw, 36px);
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-xs);
+}
+
+.location-detail {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.875rem;
+    margin-top: 1.25rem;
+}
+
+.location-detail > i {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    color: var(--primary);
+    background: var(--primary-subtle);
+    border: 1px solid var(--primary-border);
+    border-radius: var(--radius);
+    font-size: 1.1rem;
+}
+
+.location-detail strong {
+    display: block;
+    margin-bottom: 2px;
+    font-size: 0.9375rem;
+    color: var(--foreground);
+}
+
+.location-detail span {
+    color: var(--foreground-muted);
+    font-size: 0.84rem;
+}
+
+.map-frame {
+    height: 100%;
+    min-height: 420px;
+    overflow: hidden;
+    background: #e2e8f0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-sm);
+}
+
+.map-frame iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 420px;
+    border: 0;
+}
+
+/* Facebook Fanpage Frame */
+.facebook-page {
+    width: min(100%, 380px);
+    min-height: 500px;
+    margin-inline: auto;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    padding: 1.25rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.facebook-page iframe {
+    display: block;
+    width: 340px;
+    max-width: 100%;
+    min-height: 500px;
+    border: 0;
+}
+
+/* Public Footer */
+.public-footer {
+    padding: 2.25rem 0;
+    color: var(--foreground-muted);
+    background: #ffffff;
+    border-top: 1px solid var(--border);
+    font-size: 0.875rem;
+}

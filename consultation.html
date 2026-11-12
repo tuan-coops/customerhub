@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Đăng ký tư vấn | EduCare Language Center</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/public.css" rel="stylesheet">
+</head>
+<body class="public-page">
+    <!-- Navbar điều hướng chính -->
+    <nav class="navbar navbar-expand-lg public-navbar sticky-top" aria-label="Điều hướng công khai">
+        <div class="container py-1">
+            <a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-dark text-decoration-none" href="consultation.html">
+                <span class="public-brand"><i class="bi bi-mortarboard-fill" aria-hidden="true"></i></span>
+                <div>
+                    <span class="d-block" style="font-size: 1.15rem; line-height: 1.2;">EduCare</span>
+                    <small class="text-muted fw-normal" style="font-size: .75rem;">Language Center</small>
+                </div>
+            </a>
+            <div class="d-flex align-items-center gap-2">
+                <a class="btn btn-sm btn-outline-secondary d-none d-sm-inline-flex" href="#coursesSection">Khóa học</a>
+                <a class="btn btn-sm btn-outline-secondary d-none d-sm-inline-flex" href="#processSection">Quy trình</a>
+                <a class="btn btn-sm btn-outline-secondary d-none d-md-inline-flex" href="#locationSection">Địa chỉ</a>
+                <a class="btn btn-sm btn-outline-secondary d-none d-lg-inline-flex" href="#facebookSection">Fanpage</a>
+                <a class="btn btn-sm btn-primary" href="customers.html">
+                    <i class="bi bi-people-fill me-1" aria-hidden="true"></i>Quản trị Khách hàng
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero & Form Section -->
+        <section class="public-hero">
+            <div class="container">
+                <div class="row align-items-center g-5">
+                    <div class="col-lg-6">
+                        <span class="eyebrow"><i class="bi bi-stars me-1"></i>Tư vấn ngoại ngữ miễn phí</span>
+                        <h1 class="mt-3">Lộ trình học phù hợp bắt đầu từ việc hiểu đúng mục tiêu.</h1>
+                        <p class="lead mt-3">
+                            Để lại thông tin, đội ngũ cố vấn học tập của EduCare sẽ phân tích nhu cầu, kiểm tra trình độ và đề xuất lộ trình tối ưu nhất cho bạn.
+                        </p>
+                        <div class="row g-3 mt-2">
+                            <div class="col-sm-4">
+                                <div class="benefit">
+                                    <i class="bi bi-person-check-fill" aria-hidden="true"></i>
+                                    <strong>Tư vấn 1–1</strong>
+                                    <span>Theo mục tiêu cá nhân</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="benefit">
+                                    <i class="bi bi-compass-fill" aria-hidden="true"></i>
+                                    <strong>Lộ trình rõ ràng</strong>
+                                    <span>Chuẩn theo trình độ</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="benefit">
+                                    <i class="bi bi-calendar2-check-fill" aria-hidden="true"></i>
+                                    <strong>Chủ động lịch</strong>
+                                    <span>Trực tiếp hoặc Online</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <section class="consultation-card" id="formCard" aria-labelledby="formTitle">
+                            <div class="mb-4">
+                                <div class="d-flex align-items-center justify-content-between mb-1">
+                                    <h2 id="formTitle" class="h4 fw-bold mb-0">Đăng ký nhận tư vấn</h2>
+                                    <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1 small">
+                                        <i class="bi bi-shield-lock me-1"></i>Bảo mật
+                                    </span>
+                                </div>
+                                <p class="text-secondary small mb-0">Cam kết thông tin chỉ dùng để xây dựng lộ trình học tập tối ưu.</p>
+                            </div>
+
+                            <div id="publicAlert" class="alert d-none" role="alert" tabindex="-1"></div>
+
+                            <form id="consultationForm" novalidate>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label required" for="fullName">Họ và tên</label>
+                                        <input class="form-control" id="fullName" name="full_name" maxlength="100" autocomplete="name" placeholder="Ví dụ: Nguyễn Văn An" required>
+                                        <div class="invalid-feedback">Vui lòng nhập họ và tên.</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label required" for="phoneNumber">Số điện thoại</label>
+                                        <input class="form-control" type="tel" id="phoneNumber" name="phone_number" autocomplete="tel" placeholder="Ví dụ: 0912345678" pattern="(?:\+84|0)[0-9]{8,10}" required>
+                                        <div class="invalid-feedback">Nhập số điện thoại hợp lệ (8-11 chữ số).</div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label" for="email">Địa chỉ Email</label>
+                                        <input class="form-control" type="email" id="email" name="email" autocomplete="email" placeholder="example@gmail.com">
+                                        <div class="invalid-feedback">Email chưa đúng định dạng.</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label required" for="languageInterest">Ngoại ngữ quan tâm</label>
+                                        <select class="form-select" id="languageInterest" name="language_interest" required>
+                                            <option value="Tiếng Anh">Tiếng Anh (IELTS / TOEIC / Giao tiếp)</option>
+                                            <option value="Tiếng Nhật">Tiếng Nhật (JLPT N5 – N2)</option>
+                                            <option value="Tiếng Hàn">Tiếng Hàn (Topik I – II)</option>
+                                            <option value="Tiếng Trung">Tiếng Trung (HSK 1 – 6)</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label required" for="learningGoal">Mục tiêu học tập</label>
+                                        <input class="form-control" id="learningGoal" name="learning_goal" placeholder="Ví dụ: IELTS 6.5, giao tiếp công việc..." maxlength="100" required>
+                                        <div class="invalid-feedback">Vui lòng nhập mục tiêu mong muốn.</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="preferredSchedule">Thời gian học phù hợp</label>
+                                        <input class="form-control" id="preferredSchedule" name="preferred_schedule" placeholder="Ví dụ: Tối thứ 2-4-6, cuối tuần">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="learningFormat">Hình thức học</label>
+                                        <select class="form-select" id="learningFormat" name="learning_format">
+                                            <option value="">Chưa xác định</option>
+                                            <option value="offline">Học tại trung tâm (Offline)</option>
+                                            <option value="online">Học trực tuyến (Online)</option>
+                                            <option value="hybrid">Kết hợp linh hoạt (Hybrid)</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label" for="note">Nội dung cần hỗ trợ thêm</label>
+                                        <textarea class="form-control" id="note" name="note" rows="3" maxlength="1000" placeholder="Trình độ hiện tại của bạn, thắc mắc về khóa học, bài test đầu vào..."></textarea>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="source" value="Website">
+                                <button class="btn btn-primary btn-lg w-100 mt-4" id="submitConsultation" type="submit">
+                                    <i class="bi bi-send-fill me-2"></i>Gửi yêu cầu tư vấn miễn phí
+                                </button>
+                            </form>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Course Highlights Section -->
+        <section class="public-section bg-white border-bottom" id="coursesSection">
+            <div class="container">
+                <div class="text-center max-w-700 mx-auto mb-5">
+                    <span class="eyebrow mb-2">Chương trình đào tạo</span>
+                    <h2 class="h2 fw-bold">Các chương trình ngoại ngữ trọng điểm</h2>
+                    <p class="text-secondary">Thiết kế khoa học, chú trọng ứng dụng thực tế và chuẩn hóa chứng chỉ quốc tế.</p>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-3">
+                        <div class="course-card">
+                            <div class="course-icon bg-primary-subtle text-primary">
+                                <i class="bi bi-journal-bookmark-fill"></i>
+                            </div>
+                            <h3 class="h5 fw-bold mb-2">Tiếng Anh Học thuật</h3>
+                            <p class="text-secondary small mb-3">Luyện thi IELTS 5.0 - 7.5+, TOEIC 4 kỹ năng và giao tiếp chuyên nghiệp cho người đi làm.</p>
+                            <span class="badge bg-light text-secondary border mt-auto align-self-start">IELTS · TOEIC · Business</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="course-card">
+                            <div class="course-icon bg-success-subtle text-success">
+                                <i class="bi bi-translate"></i>
+                            </div>
+                            <h3 class="h5 fw-bold mb-2">Tiếng Nhật JLPT</h3>
+                            <p class="text-secondary small mb-3">Lộ trình cấp tốc từ N5 đến N2, phục vụ du học, xuất khẩu lao động và doanh nghiệp Nhật Bản.</p>
+                            <span class="badge bg-light text-secondary border mt-auto align-self-start">N5 · N4 · N3 · N2</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="course-card">
+                            <div class="course-icon bg-warning-subtle text-warning">
+                                <i class="bi bi-chat-quote-fill"></i>
+                            </div>
+                            <h3 class="h5 fw-bold mb-2">Tiếng Hàn TOPIK</h3>
+                            <p class="text-secondary small mb-3">Đào tạo tiếng Hàn sơ - trung cấp, luyện thi Topik I và II, giao tiếp thương mại Hàn Quốc.</p>
+                            <span class="badge bg-light text-secondary border mt-auto align-self-start">Topik 1 · Topik 2 · Giao tiếp</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="course-card">
+                            <div class="course-icon bg-danger-subtle text-danger">
+                                <i class="bi bi-globe2"></i>
+                            </div>
+                            <h3 class="h5 fw-bold mb-2">Tiếng Trung HSK</h3>
+                            <p class="text-secondary small mb-3">Chuẩn hóa phát âm Pinyin, giao tiếp đời sống và luyện thi HSK 1 đến HSK 5 nhanh chóng.</p>
+                            <span class="badge bg-light text-secondary border mt-auto align-self-start">HSK 1 - 5 · Giao tiếp</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3-Step Process Section -->
+        <section class="public-section" id="processSection">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <span class="eyebrow mb-2">Quy trình đơn giản</span>
+                    <h2 class="h2 fw-bold">3 bước để bắt đầu lộ trình học tập</h2>
+                </div>
+                <div class="row g-4 text-center">
+                    <div class="col-md-4">
+                        <div class="p-3">
+                            <div class="step-number mx-auto">1</div>
+                            <h3 class="h5 fw-bold mb-2">Đăng ký nhu cầu</h3>
+                            <p class="text-secondary small">Điền thông tin mục tiêu học tập và thời gian rảnh vào biểu mẫu tư vấn trực tuyến ở trên.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-3">
+                            <div class="step-number mx-auto">2</div>
+                            <h3 class="h5 fw-bold mb-2">Đánh giá &amp; Tư vấn 1–1</h3>
+                            <p class="text-secondary small">Chuyên viên EduCare liên hệ kiểm tra đầu vào miễn phí và tư vấn lộ trình học phù hợp nhất.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-3">
+                            <div class="step-number mx-auto">3</div>
+                            <h3 class="h5 fw-bold mb-2">Học thử &amp; Nhập học</h3>
+                            <p class="text-secondary small">Trải nghiệm buổi học thử để nắm bắt phương pháp giảng dạy trước khi chính thức bắt đầu khóa học.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="public-section bg-white border-top">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <span class="eyebrow mb-2">Giải đáp thắc mắc</span>
+                    <h2 class="h2 fw-bold">Câu hỏi thường gặp</h2>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="faq-card">
+                            <h3 class="h6 fw-bold mb-2"><i class="bi bi-question-circle-fill text-primary me-2"></i>Đăng ký nhận tư vấn có mất phí không?</h3>
+                            <p class="text-secondary small mb-0">Hoàn toàn không. Mọi hoạt động tư vấn định hướng, xây dựng lộ trình và kiểm tra trình độ đầu vào tại EduCare đều được hỗ trợ 100% miễn phí.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="faq-card">
+                            <h3 class="h6 fw-bold mb-2"><i class="bi bi-question-circle-fill text-primary me-2"></i>Mất gốc hoặc người mới bắt đầu có học được không?</h3>
+                            <p class="text-secondary small mb-0">Có các lớp sơ cấp bắt đầu từ bảng chữ cái, phát âm chuẩn và ngữ pháp căn bản, giúp học viên tiếp cận ngôn ngữ tự nhiên và tự tin.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="faq-card">
+                            <h3 class="h6 fw-bold mb-2"><i class="bi bi-question-circle-fill text-primary me-2"></i>Nếu bận việc đột xuất có được học bù không?</h3>
+                            <p class="text-secondary small mb-0">Trung tâm hỗ trợ học bù tại lớp song song hoặc xem lại video bài giảng ghi hình chất lượng cao đối với các buổi học trực tuyến.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="faq-card">
+                            <h3 class="h6 fw-bold mb-2"><i class="bi bi-question-circle-fill text-primary me-2"></i>Sau bao lâu trung tâm sẽ liên hệ lại?</h3>
+                            <p class="text-secondary small mb-0">Đội ngũ tư vấn sẽ liên hệ qua số điện thoại hoặc Zalo bạn đăng ký trong vòng 2-4 giờ làm việc.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Location Section (Google Maps) -->
+        <section class="public-section location-section" id="locationSection" aria-labelledby="locationTitle">
+            <div class="container">
+                <div class="row g-4 align-items-stretch">
+                    <div class="col-lg-4">
+                        <div class="location-info h-100">
+                            <span class="eyebrow mb-3"><i class="bi bi-geo-alt-fill me-1" aria-hidden="true"></i>Địa chỉ trung tâm</span>
+                            <h2 id="locationTitle" class="h3 fw-bold">Ghé thăm EduCare</h2>
+                            <p class="text-secondary small">Bản đồ giúp học viên xác định vị trí trung tâm và lựa chọn tuyến đường phù hợp trước khi đến tư vấn hoặc học thử.</p>
+                            <div class="location-detail">
+                                <i class="bi bi-building-fill" aria-hidden="true"></i>
+                                <div><strong>Cơ sở đào tạo</strong><span>Khu vực Học viện Công nghệ Bưu chính Viễn thông, Hà Nội</span></div>
+                            </div>
+                            <div class="location-detail">
+                                <i class="bi bi-clock-fill" aria-hidden="true"></i>
+                                <div><strong>Thời gian hỗ trợ</strong><span>Thứ 2 – Chủ nhật, 08:00 – 21:00</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="map-frame">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3718.8368381272558!2d105.78336726444036!3d20.981142767582767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135accdd8a1ad71%3A0xa2f9b16036648187!2zSOG7jWMgdmnhu4duIEPDtG5nIG5naOG7hyBCxrB1IGNow61uaCB2aeG7hW4gdGjDtG5n!5e0!3m2!1svi!2s!4v1793613702485!5m2!1svi!2s" title="Bản đồ vị trí EduCare Language Center" width="600" height="450" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Facebook Fanpage Section -->
+        <section class="public-section bg-white border-top" id="facebookSection" aria-labelledby="facebookTitle">
+            <div class="container">
+                <div class="row g-4 align-items-center justify-content-center">
+                    <div class="col-lg-6">
+                        <span class="eyebrow mb-3"><i class="bi bi-facebook me-1" aria-hidden="true"></i>Kết nối cộng đồng</span>
+                        <h2 id="facebookTitle" class="h3 fw-bold">Theo dõi Fanpage Học viện PTIT</h2>
+                        <p class="text-secondary mb-4">Cập nhật các hoạt động, thông báo tuyển sinh và nội dung học tập mới nhất từ Học viện trên Facebook.</p>
+                        <a class="btn btn-outline-primary" href="https://www.facebook.com/HocvienPTIT" target="_blank" rel="noopener noreferrer">
+                            <i class="bi bi-box-arrow-up-right me-2" aria-hidden="true"></i>Mở Fanpage Facebook
+                        </a>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="facebook-page">
+                            <iframe
+                                title="Fanpage Học viện PTIT"
+                                src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FHocvienPTIT&amp;tabs=timeline&amp;width=340&amp;height=500&amp;small_header=false&amp;adapt_container_width=true&amp;hide_cover=false&amp;show_facepile=true"
+                                width="340"
+                                height="500"
+                                style="border:none;overflow:hidden"
+                                scrolling="no"
+                                frameborder="0"
+                                allowfullscreen="true"
+                                loading="lazy"
+                                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="public-footer">
+        <div class="container d-flex flex-wrap justify-content-between align-items-center gap-2">
+            <div>
+                <strong class="text-dark">EduCare Language Center</strong>
+                <span class="d-block small text-muted">Hệ thống hỗ trợ tư vấn và quản lý học viên ngoại ngữ</span>
+            </div>
+            <div class="small">
+                <span>© 2026 EduCare CRM. Thông tin được cam kết bảo mật.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/public-consultation.js"></script>
+</body>
+</html>
