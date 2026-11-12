@@ -28,6 +28,7 @@ Hệ thống quản lý thông tin khách hàng dành cho trung tâm ngoại ng�
    - Truy cập công khai, không cần đăng ký tài khoản.
    - Xem thông tin các chương trình ngoại ngữ (IELTS, TOEIC, Tiếng Nhật, Hàn, Trung).
    - Xem bản đồ **Google Maps iframe** chỉ đường và **Facebook Fanpage iframe** được nhúng trực tiếp.
+   - Trò chuyện với **Chatbot tư vấn tự động** (Rule-based) hỗ trợ giải đáp 24/7 về khóa học, học phí, lịch học bằng AJAX.
    - Gửi biểu mẫu **Đăng ký tư vấn** bằng AJAX (`api/customers/public-create.php`), hệ thống tự sinh mã hồ sơ và phản hồi ngay trên trang.
 
 2. **Quản trị viên / Admin (`customers.html`)**:
@@ -57,17 +58,21 @@ customerhub/
 ├── assets/
 │   ├── css/
 │   │   ├── style.css            # CSS giao diện Admin và dùng chung
-│   │   └── public.css           # CSS giao diện trang Khách hàng
+│   │   ├── public.css           # CSS giao diện trang Khách hàng
+│   │   └── chatbot.css          # CSS giao diện widget Chatbot
 │   └── js/
 │       ├── app.js               # Tiện ích App.request (Fetch API), toast, escape, debounce
 │       ├── layout.js            # Khung giao diện Admin và khởi tạo phiên tự động
 │       ├── customers.js         # Logic CRUD bảng khách hàng bằng AJAX
-│       └── public-consultation.js # Logic gửi form tư vấn bằng AJAX
+│       ├── public-consultation.js # Logic gửi form tư vấn bằng AJAX
+│       └── chatbot.js           # Widget chatbot tư vấn tự động
 │
 ├── api/
 │   ├── auth/
 │   │   ├── session.php          # Cấp phiên Admin và CSRF token
 │   │   └── csrf.php             # Cấp CSRF token cho form công khai
+│   ├── chatbot/
+│   │   └── message.php          # Xử lý câu hỏi chatbot bằng thuật toán so khớp từ khóa
 │   └── customers/
 │       ├── list.php             # Lấy danh sách, tìm kiếm, lọc, phân trang
 │       ├── create.php           # Thêm khách hàng mới

@@ -10,10 +10,11 @@
 | Yêu cầu đề bài | Cách hệ thống đáp ứng |
 |---|---|
 | **1. Đầy đủ CRUD** | Thiết kế module trọng tâm **Quản lý thông tin khách hàng**: Thêm (Create), Xem (Read/Search), Sửa (Update), Xóa (Delete). |
-| **2. Sử dụng AJAX thuần** | Mọi thao tác CRUD, tìm kiếm, lọc, phân trang đều dùng native **Fetch API**, gửi/nhận JSON/FormData mà **không tải lại trang**. |
-| **3. Có 2 vai trò** | **Khách hàng**: Truy cập trang công khai `consultation.html`, đăng ký tư vấn, xem bản đồ & fanpage (không cần tài khoản).<br>**Admin**: Truy cập `customers.html`, tự động nhận quyền phiên quản trị để thực hiện CRUD (không cần form đăng nhập). |
+| **2. Sử dụng AJAX thuần** | Mọi thao tác CRUD, tìm kiếm, lọc, phân trang, chat tư vấn đều dùng native **Fetch API**, gửi/nhận JSON/FormData mà **không tải lại trang**. |
+| **3. Có 2 vai trò** | **Khách hàng**: Truy cập trang công khai `consultation.html`, đăng ký tư vấn, chat tư vấn, xem bản đồ & fanpage (không cần tài khoản).<br>**Admin**: Truy cập `customers.html`, tự động nhận quyền phiên quản trị để thực hiện CRUD (không cần form đăng nhập). |
 | **4. Thông tin liên hệ đã nhúng** | Nhúng bản đồ **Google Maps iframe** và **Facebook Fanpage iframe** chính thức của trung tâm. |
-| **5. Font chữ Sans-serif** | Sử dụng font **Be Vietnam Pro** chuẩn tiếng Việt, giao diện hiện đại, chuẩn Responsive trên cả PC và Mobile. |
+| **5. Chatbot tư vấn tự động** | Tích hợp **Chatbot tư vấn tự động (Rule-based / Keyword matching)** trực tiếp qua backend PHP, hỗ trợ giải đáp 24/7 về khóa học, học phí, lịch học, chạy mượt mà offline không cần phụ thuộc API key bên ngoài. |
+| **6. Font chữ Sans-serif** | Sử dụng font **Be Vietnam Pro** chuẩn tiếng Việt, giao diện hiện đại, chuẩn Responsive trên cả PC và Mobile. |
 
 ---
 
@@ -24,7 +25,10 @@
 - **Hành động trình bày:**
   1. Giới thiệu giao diện trung tâm ngoại ngữ EduCare: các khóa học (IELTS, TOEIC, Tiếng Nhật, Hàn, Trung), quy trình tư vấn và câu hỏi thường gặp FAQ.
   2. Cuộn xuống xem **Bản đồ Google Maps** chỉ đường đến trung tâm và **Fanpage Facebook** được nhúng trực tiếp bằng iframe.
-  3. Thực hiện chức năng **Đăng ký tư vấn (Thêm mới từ phía Khách hàng qua AJAX)**:
+  3. Mở **Chatbot tư vấn tự động** ở góc dưới phải màn hình:
+     - Bấm thử các câu hỏi gợi ý hoặc gõ: *"Trung tâm có khóa học nào?"*, *"Học phí bao nhiêu?"*, *"Lịch học như thế nào?"*, *"Địa chỉ ở đâu?"*.
+     - Chatbot phản hồi thông minh, nhanh chóng qua AJAX backend PHP mà không cần internet hay API key bên ngoài.
+  4. Thực hiện chức năng **Đăng ký tư vấn (Thêm mới từ phía Khách hàng qua AJAX)**:
      - Điền Họ tên, Số điện thoại, Ngoại ngữ quan tâm, Mục tiêu học.
      - Bấm **"Gửi yêu cầu tư vấn miễn phí"**.
      - Form gửi bằng AJAX đến `api/customers/public-create.php`, trả về thông báo thành công kèm mã hồ sơ (ví dụ: `KH2026110001`) ngay lập tức mà không tải lại trang.
@@ -67,17 +71,20 @@
 ## III. Các câu hỏi vấn đáp thường gặp và câu trả lời mẫu
 
 ### 1. AJAX trong dự án được triển khai như thế nào?
-> **Trả lời:** Em sử dụng native **Fetch API** của JavaScript, được đóng gói trong hàm tiện ích `App.request()` tại `assets/js/app.js`. Khi người dùng thao tác (submit form, tìm kiếm, bấm nút sửa/xóa), JavaScript sẽ gửi HTTP request (GET hoặc POST) cùng FormData hoặc query string đến các file PHP trong thư mục `api/`. Backend trả về JSON `{ success, message, data }`, sau đó JavaScript cập nhật lại DOM (thay đổi HTML của bảng, modal, thông báo) mà không cần tải lại toàn bộ trang web.
+> **Trả lời:** Em sử dụng native **Fetch API** của JavaScript, được đóng gói trong hàm tiện ích `App.request()` tại `assets/js/app.js`. Khi người dùng thao tác (submit form, tìm kiếm, bấm nút sửa/xóa, chat bot), JavaScript sẽ gửi HTTP request (GET hoặc POST) cùng FormData hoặc query string đến các file PHP trong thư mục `api/`. Backend trả về JSON `{ success, message, data }`, sau đó JavaScript cập nhật lại DOM (thay đổi HTML của bảng, modal, thông báo) mà không cần tải lại toàn bộ trang web.
 
 ### 2. Hai vai trò Khách hàng và Admin hoạt động ra sao khi không có đăng nhập?
 > **Trả lời:**
-> - **Khách hàng:** Vào trang `consultation.html` để xem thông tin, gửi yêu cầu tư vấn. Họ chỉ có quyền tạo yêu cầu tư vấn (`public-create.php`), không thể xem danh sách hoặc can thiệp dữ liệu của người khác.
+> - **Khách hàng:** Vào trang `consultation.html` để xem thông tin, gửi yêu cầu tư vấn, chat tư vấn. Họ chỉ có quyền tạo yêu cầu tư vấn (`public-create.php`), không thể xem danh sách hoặc can thiệp dữ liệu của người khác.
 > - **Admin:** Vào trang `customers.html`. Để thuận tiện cho việc chấm bài và demo cục bộ, backend tự động khởi tạo Session Admin thông qua hàm `ensureAutoAdminSession()` trong `includes/auth.php`. Nhờ đó, Admin có đầy đủ quyền Thêm, Xem, Sửa, Xóa trên toàn bộ hồ sơ khách hàng.
 
-### 3. Cơ sở dữ liệu của hệ thống gồm những bảng nào?
+### 3. Chatbot tư vấn được thiết kế theo nguyên lý nào?
+> **Trả lời:** Chatbot tư vấn được xây dựng theo mô hình **Rule-based / Keyword matching** (so khớp từ khóa quy tắc nghiệp vụ). Khi khách hàng đặt câu hỏi, JavaScript gửi request AJAX đến `api/chatbot/message.php`. Backend PHP chuẩn hóa câu hỏi và phân tích các nhóm từ khóa (khóa học, học phí, lịch học, hình thức học, địa chỉ, mất gốc...) để đưa ra câu trả lời chuẩn xác. Ưu điểm là phản hồi tức thì, bảo mật, hoạt động hoàn toàn ổn định offline mà không lo lỗi kết nối dịch vụ bên ngoài.
+
+### 4. Cơ sở dữ liệu của hệ thống gồm những bảng nào?
 > **Trả lời:** Module Quản lý khách hàng tập trung vào bảng cốt lõi là **`customers`** chứa toàn bộ thông tin: họ tên, số điện thoại, email, ngoại ngữ quan tâm, mục tiêu học tập, lịch học, hình thức học, nguồn khách hàng, trạng thái tư vấn và trạng thái hồ sơ. Ngoài ra có bảng **`users`** để đại diện cho tài khoản quản trị viên phụ trách.
 
-### 4. Hệ thống chống lỗi bảo mật SQL Injection và XSS như thế nào?
+### 5. Hệ thống chống lỗi bảo mật SQL Injection và XSS như thế nào?
 > **Trả lời:**
 > - **Chống SQL Injection:** Ở backend PHP, 100% các câu lệnh truy vấn đều sử dụng **PDO Prepared Statements** với tham số ràng buộc (`:full_name`, `:phone_number`...), dữ liệu người dùng không bao giờ được nối trực tiếp vào chuỗi SQL.
 > - **Chống XSS:** Ở frontend JavaScript, toàn bộ dữ liệu lấy từ server trước khi chèn vào `innerHTML` đều được xử lý qua hàm `App.escape()` để chuyển đổi các ký tự đặc biệt (`<`, `>`, `&`, `"`, `'`) thành mã HTML entities an toàn.

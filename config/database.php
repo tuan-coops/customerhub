@@ -20,7 +20,11 @@ function dbPassword(): string
     return ($password !== false && $password !== '') ? $password : DB_PASS;
 }
 
-// Tạo một kết nối PDO dùng lại trong suốt vòng đời của request hiện tại.
+/**
+ * Tạo một kết nối PDO dùng lại trong suốt vòng đời của request.
+ * Tự động thử mật khẩu cấu hình, nếu máy khác dùng XAMPP mặc định (mật khẩu trống)
+ * hệ thống sẽ tự động kết nối bằng mật khẩu trống mà không gây lỗi.
+ */
 function db(): PDO
 {
     static $pdo = null;
@@ -29,21 +33,32 @@ function db(): PDO
         return $pdo;
     }
 
-    try {
-        $pdo = new PDO(
-            'mysql:host=' . DB_HOST . ';port=' . DB_PORT . ';dbname=' . DB_NAME . ';charset=utf8mb4',
-            dbUser(),
-            dbPassword(),
-            [
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                PDO::ATTR_EMULATE_PREPARES => false,
-            ]
-        );
-    } catch (PDOException $exception) {
-        error_log($exception->getMessage());
-        throw new RuntimeException('Không thể kết nối cơ sở dữ liệu.');
+    $passwordsToTry = [dbPassword()];
+    if (!in_array('', $passwordsToTry, true)) {
+        $passwordsToTry[] = '';
     }
 
-    return $pdo;
+    $lastException = null;
+    foreach ($passwordsToTry as $pass) {
+        try {
+            $pdo = new PDO(
+                'mysql:host=' . DB_HOST . ';port=' . DB_PORT . ';dbname=' . DB_NAME . ';charset=utf8mb4',
+                dbUser(),
+                $pass,
+                [
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                    PDO::ATTR_EMULATE_PREPARES => false,
+                ]
+            );
+            return $pdo;
+        } catch (PDOException $exception) {
+            $lastException = $exception;
+        }
+    }
+
+    if ($lastException !== null) {
+        error_log($lastException->getMessage());
+    }
+    throw new RuntimeException('Không thể kết nối cơ sở dữ liệu.');
 }

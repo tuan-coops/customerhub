@@ -1,6 +1,9 @@
 'use strict';
 
-// Tạo widget chat, giữ lịch sử ngắn và gọi Gemini qua backend PHP.
+/**
+ * chatbot.js: Tạo widget chat tư vấn tự động, gửi câu hỏi đến backend PHP
+ * sử dụng AJAX Fetch API mà không cần tải lại trang.
+ */
 document.addEventListener('DOMContentLoaded', () => {
     const quickQuestions = [
         'Trung tâm có khóa học nào?',
@@ -8,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
         'Lịch học ra sao?',
         'Địa chỉ trung tâm ở đâu?'
     ];
-    const history = [];
     let sending = false;
 
     const root = document.createElement('div');
@@ -18,10 +20,10 @@ document.addEventListener('DOMContentLoaded', () => {
             <i class="bi bi-chat-dots-fill" aria-hidden="true"></i>
             <span class="chatbot-notification" aria-hidden="true">1</span>
         </button>
-        <section class="chatbot-panel" id="chatbotPanel" aria-label="Trợ lý AI EduCare" hidden>
+        <section class="chatbot-panel" id="chatbotPanel" aria-label="Trợ lý tư vấn EduCare" hidden>
             <header class="chatbot-header">
-                <div class="chatbot-avatar" aria-hidden="true"><i class="bi bi-stars"></i></div>
-                <div><strong>Trợ lý AI EduCare</strong><span>Hỗ trợ tư vấn bằng Gemini</span></div>
+                <div class="chatbot-avatar" aria-hidden="true"><i class="bi bi-chat-heart-fill"></i></div>
+                <div><strong>Trợ lý Tư vấn EduCare</strong><span>Hỗ trợ trực tuyến 24/7</span></div>
                 <button class="chatbot-close" type="button" aria-label="Đóng cửa sổ chat"><i class="bi bi-x-lg" aria-hidden="true"></i></button>
             </header>
             <div class="chatbot-messages" aria-live="polite" aria-relevant="additions"></div>
@@ -31,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <input class="chatbot-input" id="chatbotInput" type="text" maxlength="500" autocomplete="off" placeholder="Nhập câu hỏi..." required>
                 <button class="chatbot-send" type="submit" aria-label="Gửi câu hỏi"><i class="bi bi-send-fill" aria-hidden="true"></i></button>
             </form>
-            <div class="chatbot-note">AI có thể trả lời chưa chính xác. Không gửi thông tin nhạy cảm.</div>
+            <div class="chatbot-note">Trợ lý tư vấn tự động EduCare Language Center</div>
         </section>
     `;
     document.body.appendChild(root);
@@ -74,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
         App.csrfToken = result.data.csrf_token;
     }
 
-    // Gửi câu hỏi cùng lịch sử hội thoại, sau đó hiển thị phản hồi của Gemini.
+    // Gửi câu hỏi đến backend PHP bằng AJAX Fetch API
     async function answer(question) {
         const cleanQuestion = question.trim();
         if (!cleanQuestion || sending) return;
@@ -82,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
         addMessage(cleanQuestion, 'user');
         input.value = '';
         setSending(true);
-        const loadingMessage = addMessage('Đang suy nghĩ…', 'bot', 'chatbot-message-loading');
+        const loadingMessage = addMessage('Đang trả lời…', 'bot', 'chatbot-message-loading');
 
         try {
             await ensureCsrfToken();
@@ -90,8 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    message: cleanQuestion,
-                    history
+                    message: cleanQuestion
                 })
             });
 
@@ -100,14 +101,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             loadingMessage.remove();
             addMessage(reply, 'bot');
-            history.push(
-                { role: 'user', text: cleanQuestion },
-                { role: 'model', text: reply }
-            );
-            if (history.length > 8) history.splice(0, history.length - 8);
         } catch (error) {
             loadingMessage.remove();
-            addMessage(error.message || 'Không thể kết nối trợ lý AI. Vui lòng thử lại.', 'bot', 'chatbot-message-error');
+            addMessage(error.message || 'Không thể kết nối trợ lý. Vui lòng thử lại.', 'bot', 'chatbot-message-error');
         } finally {
             setSending(false);
             input.focus();
@@ -148,5 +144,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.key === 'Escape' && !panel.hidden) closeChat();
     });
 
-    addMessage('Xin chào! Tôi là trợ lý AI của EduCare. Bạn muốn tìm hiểu khóa học, lịch học hay đăng ký tư vấn?', 'bot');
+    // Lời chào mở đầu
+    addMessage('Xin chào! Mình là Trợ lý tư vấn EduCare. Bạn đang quan tâm đến khóa học, học phí hay lịch học nào ạ?', 'bot');
 });

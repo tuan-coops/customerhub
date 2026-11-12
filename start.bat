@@ -11,8 +11,7 @@ set "MYSQL_EXE="
 
 rem ====================================================
 rem DATABASE CONFIGURATION:
-rem Set your MySQL credentials below.
-rem If using default XAMPP (no password), set EDUCARE_DB_PASS=
+rem Default root password 123456 (or empty on XAMPP).
 rem ====================================================
 if not defined EDUCARE_DB_USER set "EDUCARE_DB_USER=root"
 if not defined EDUCARE_DB_PASS set "EDUCARE_DB_PASS=123456"
@@ -76,13 +75,20 @@ if not errorlevel 1 (
     )
 )
 
-rem Import database schema if not exists
+rem Import database schema if not exists (auto-detect password or empty)
 netstat -ano | findstr /r /c:":%DB_PORT% .*LISTENING" >nul 2>&1
 if not errorlevel 1 if defined MYSQL_EXE if exist "%PROJECT_DIR%database\educare_crm.sql" (
-    "%MYSQL_EXE%" --protocol=TCP --host=127.0.0.1 --port=%DB_PORT% --user=%EDUCARE_DB_USER% --password=%EDUCARE_DB_PASS% --skip-column-names --execute="SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME='educare_crm'" 2>nul | findstr /x "educare_crm" >nul
+    set "PASS_PARAM=--password=%EDUCARE_DB_PASS%"
+    "%MYSQL_EXE%" --protocol=TCP --host=127.0.0.1 --port=%DB_PORT% --user=%EDUCARE_DB_USER% !PASS_PARAM! --skip-column-names --execute="SELECT 1" >nul 2>&1
+    if errorlevel 1 (
+        "%MYSQL_EXE%" --protocol=TCP --host=127.0.0.1 --port=%DB_PORT% --user=%EDUCARE_DB_USER% --skip-column-names --execute="SELECT 1" >nul 2>&1
+        if not errorlevel 1 set "PASS_PARAM="
+    )
+
+    "%MYSQL_EXE%" --protocol=TCP --host=127.0.0.1 --port=%DB_PORT% --user=%EDUCARE_DB_USER% !PASS_PARAM! --skip-column-names --execute="SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME='educare_crm'" 2>nul | findstr /x "educare_crm" >nul
     if errorlevel 1 (
         echo [INFO] Database educare_crm not found. Importing schema...
-        "%MYSQL_EXE%" --protocol=TCP --host=127.0.0.1 --port=%DB_PORT% --user=%EDUCARE_DB_USER% --password=%EDUCARE_DB_PASS% < "%PROJECT_DIR%database\educare_crm.sql"
+        "%MYSQL_EXE%" --protocol=TCP --host=127.0.0.1 --port=%DB_PORT% --user=%EDUCARE_DB_USER% !PASS_PARAM! < "%PROJECT_DIR%database\educare_crm.sql"
         if errorlevel 1 (
             echo [WARNING] Could not auto-import database\educare_crm.sql.
             echo Please import database\educare_crm.sql manually via phpMyAdmin or MySQL Workbench.
